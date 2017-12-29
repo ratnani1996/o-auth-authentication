@@ -5,6 +5,10 @@ const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 
+//connect to the database
+const {connection} = require('./config/Connection')
+connection();
+
 app.use(morgan('dev'))
 app.use(cookieParser());
 app.use(session({
@@ -14,23 +18,7 @@ app.use(session({
     originalMaxAge : 10*60
 }))
 
-app.get('/',(req, res)=>{
-    res.send(`This is a get request to ${req.url}`)
-    console.log("===============");
-    console.log(req.cookies);
-    console.log("===============");
-    console.log(req.session);
-    console.log("===============");
-})
-
-app.get('/limit', (req, res)=>{
-    res.send(`This is a get request to ${req.url}`)
-    console.log("===============");
-    console.log(req.cookies);
-    console.log("===============");
-    console.log(req.session);
-    console.log("===============");
-})
+app.use(require('./controller/routes/routes'));
 
 app.listen(process.env.PORT, ()=>{
     console.log(`Listening to port ${process.env.PORT}`)
