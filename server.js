@@ -4,6 +4,7 @@ require('dotenv').config({path : './variables.env'});
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
+const bodyParser = require('body-parser')
 
 //connect to the database
 const {connection} = require('./config/Connection')
@@ -17,6 +18,10 @@ app.use(session({
     resave : true,
     originalMaxAge : 10*60
 }))
+
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+app.set('view engine', 'ejs')
 
 app.use(require('./controller/routes/routes'));
 
