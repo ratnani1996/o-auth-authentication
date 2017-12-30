@@ -1,6 +1,7 @@
 const express = require('express')
 const routes = express.Router();
 const {User} = require('./../../model/UserModel')
+const {passport} = require('./../../config/Passport.js')
 
 routes.get('/', (req, res)=>{
     res.render('index');
@@ -23,21 +24,9 @@ routes.get('/:username/:password', (req, res)=>{
 })
 
 routes.get('/signup', (req, res)=>{
-    res.render('signup', {message : ""});  
+    res.render('signup', {message : req.flash('message')});  
 })
 
-routes.post('/signup', (req, res)=>{
-    var user = new User({
-        username : req.body.email,
-        password : req.body.password
-    })
-    user.save()
-        .then((newUser)=>{
-            res.send(` ${newUser.username} added to the database`)
-        })
-        .catch((err)=>{
-            res.redirect('/');
-        })
-})
+routes.post('/signup', passport.authenticate('local', {failureRedirect : '/signup', successRedirect : '/'}))
 
 module.exports = routes;

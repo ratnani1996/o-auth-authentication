@@ -5,6 +5,9 @@ const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
 const bodyParser = require('body-parser')
+//requiring passport
+const passport = require('passport')
+const flash = require('connect-flash')
 
 //connect to the database
 const {connection} = require('./config/Connection')
@@ -19,12 +22,15 @@ app.use(session({
     originalMaxAge : 10*60
 }))
 
+//initialising passport
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.set('view engine', 'ejs')
 
 app.use(require('./controller/routes/routes'));
-
 app.listen(process.env.PORT, ()=>{
     console.log(`Listening to port ${process.env.PORT}`)
 })
