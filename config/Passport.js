@@ -16,7 +16,7 @@ passport.deserializeUser((id, done)=>{
         })
 })
 
-passport.use(new LocalStrategy({
+passport.use('local-signup', new LocalStrategy({
     usernameField : 'email',
     passwordField : 'password',
     passReqToCallback : true,
@@ -37,6 +37,27 @@ passport.use(new LocalStrategy({
                            console.log(`User ${user.username} saved to database`);
                            done(null, user);
                        })
+            }
+        })
+        .catch((err)=>{
+            console.log(err);
+            done(err, null, req.flash('message' , 'It happened to have some error'));
+        })
+}))
+
+passport.use('local-login', new LocalStrategy({
+    usernameField : 'email',
+    passwordField : 'password',
+    passReqToCallback : true,
+    session : false
+}, (req, email, pass, done)=>{
+    User.findOne({username : email})
+        .then((user)=>{
+            if(user){
+                return done(null, user)
+            }
+            else{
+                return done(null, false, req.flash('message', 'User does not exists please sign up'))
             }
         })
         .catch((err)=>{
