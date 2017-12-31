@@ -54,7 +54,13 @@ passport.use('local-login', new LocalStrategy({
     User.findOne({username : email})
         .then((user)=>{
             if(user){
-                return done(null, user)
+                // return done(null, user)
+                if(user.comparePassword(pass)){
+                    return done(null, user);
+                }
+                else{
+                    return done(null, false, req.flash('message' , `Password is wrong`))
+                }
             }
             else{
                 return done(null, false, req.flash('message', 'User does not exists please sign up'))
