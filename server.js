@@ -34,6 +34,8 @@ app.use(bodyParser.json())
 app.set('view engine', 'ejs')
 
 app.use(require('./controller/routes/routes'));
+app.use('/auth/facebook', require('./controller/routes/facebookRoutes'))
+
 app.listen(process.env.PORT, ()=>{
     console.log(`Listening to port ${process.env.PORT}`)
 })

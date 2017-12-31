@@ -1,6 +1,8 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy;
 const {User} = require('./../model/UserModel')
+const FacebookStrategy = require('passport-facebook');
+require('dotenv').config({path : '../variables.env'})
 
 passport.serializeUser((user, done)=>{
     done(null, user.id);
@@ -70,7 +72,42 @@ passport.use('local-login', new LocalStrategy({
             console.log(err);
             done(err, null, req.flash('message' , 'It happened to have some error'));
         })
+1
+
 }))
+passport.use('facebook', new FacebookStrategy({
+    clientID: process.env.FACEBOOK_APP_ID,
+    clientSecret: process.env.FACEBOOK_APP_SECRET,
+    callbackURL: "http://localhost:3000/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+      User.findOne({facebookID : profile.id.toString() })
+            .then((storedUser)=>{
+                if(storedUser){
+                    return done(null, storedUser);
+                }
+                else{
+                    var user = new User({
+                        facebookID: profile.id,
+                        username : profile.displayName
+                    });
+                    user.save()
+                        .then((newUser)=>{
+                            return done(null, newUser);
+                        })
+                }
+            })
+            .catch((err)=>{
+                return done(err, false, req.flash('message', 'Some error has occured we will get back at you'))
+            })
+        
+    
+        
+
+  }
+))
+
+
 
 
 module.exports = {passport}
