@@ -3,6 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const {User} = require('./../model/UserModel')
 const FacebookStrategy = require('passport-facebook');
 require('dotenv').config({path : '../variables.env'})
+const GoogleStrategy = require( 'passport-google-oauth2' );
 
 passport.serializeUser((user, done)=>{
     done(null, user.id);
@@ -108,6 +109,33 @@ passport.use('facebook', new FacebookStrategy({
 ))
 
 
-
+passport.use('google', new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "/auth/google/redirect"
+},
+function(accessToken, refreshToken, profile, done) {
+    User.findOne({googleID : profile.id.toString()})
+        .then((storedUser)=>{
+            if(storedUser){
+                done(null, storedUser);
+            }
+            else{
+                var user = new User({
+                    googleID : profile.id,
+                    username : profile.displayName
+                })
+                user.save()
+                    .then((user)=>{
+                        console.log(`Saved to the database ${user.username}`)
+                        done(null, user);
+                    })
+            }
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
+))
 
 module.exports = {passport}

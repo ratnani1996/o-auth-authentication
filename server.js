@@ -35,7 +35,10 @@ app.set('view engine', 'ejs')
 
 app.use(require('./controller/routes/routes'));
 app.use('/auth/facebook', require('./controller/routes/facebookRoutes'))
-
+app.use('/auth/google', require('./controller/routes/googleRoutes'));
+app.use((req, res)=>{
+    res.status(404).send('Trying to be smart BRO!!!!')
+})
 app.listen(process.env.PORT, ()=>{
     console.log(`Listening to port ${process.env.PORT}`)
 })
