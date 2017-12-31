@@ -19,7 +19,10 @@ app.use(session({
     secret : process.env.SESSION_SECRET,
     saveUninitialized : true,
     resave : true,
-    originalMaxAge : 10*60
+    cookie : {
+        //secure : true
+        maxAge :10*60*1000
+    }
 }))
 
 //initialising passport
