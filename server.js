@@ -12,6 +12,7 @@ const flash = require('connect-flash')
 //connect to the database
 const {connection} = require('./config/Connection')
 connection();
+const MongoStore = require('connect-mongo')(session);
 
 app.use(morgan('dev'))
 app.use(cookieParser());
@@ -22,7 +23,10 @@ app.use(session({
     cookie : {
         //secure : true
         maxAge :10*60*1000
-    }
+    },
+    store : new MongoStore({
+        url : process.env.MONGO_URL
+    })
 }))
 
 //initialising passport
