@@ -1,46 +1,22 @@
 # o-auth-authentication
 
-> one-liner description of the module
+> handles local, google and facebook authentication
 
-background details relevant to understanding what this module does
-
-## Usage
-
-```js
-var oAuthAuthentication = require('o-auth-authentication')
-
-console.log('hello warld')
-```
-
-outputs
-
-```
-hello warld
-```
-
-## API
-
-```js
-var oAuthAuthentication = require('o-auth-authentication')
-```
-
-See [api_formatting.md](api_formatting.md) for tips.
+This example shows local, google as well as facebook authentication.
+Want to make your application more secure and with easy logins and sign ups. Sit back and copy the code, let google and facebook handle authentication also know as o-authentication.
 
 ## Install
 
-With [npm](https://npmjs.org/) installed, run
+With [yarn](https://yarnpkg.com/en/) installed, run
 
 ```
-$ npm install o-auth-authentication
+$ yarn install
+$ yarn start
 ```
-
-## Acknowledgments
-
-o-auth-authentication was inspired by..
 
 ## See Also
 
-- [`noffle/common-readme`](https://github.com/noffle/common-readme)
+- [`PassportJs`](https://github.com/jaredhanson/passport)
 - ...
 
 ## License
