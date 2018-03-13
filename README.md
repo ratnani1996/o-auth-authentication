@@ -17,7 +17,6 @@ $ yarn start
 ## See Also
 
 - [`PassportJs`](https://github.com/jaredhanson/passport)
-- ...
 
 ## License
 
