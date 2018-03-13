@@ -11,7 +11,24 @@ With [yarn](https://yarnpkg.com/en/) installed, run
 
 ```
 $ yarn install
+```
+Make sure to create a variables.env file in the root directory with contents as follows :
+```
+PORT = 
+SESSION_SECRET = 
+MONGO_URL = 
+FACEBOOK_APP_ID = 
+FACEBOOK_APP_SECRET = 
+GOOGLE_CLIENT_ID = 
+GOOGLE_CLIENT_SECRET = 
+```
+
+## Usage
+
+```js
 $ yarn start
+
+This will start the application at port 3000
 ```
 
 ## See Also
