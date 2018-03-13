@@ -1,13 +1,10 @@
 {
-  "name": "lesson_1_morgan",
+  "name": "o-auth-authentication",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
+  "repository": "https://github.com/ratnani1996/o-auth-authentication.git",
+  "author": "ratnani1996 <himanshuratnani1996@gmail.com>",
+  "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
