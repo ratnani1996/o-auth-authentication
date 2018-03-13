@@ -9,7 +9,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^2.0.0",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
     "express": "^4.16.2",
-    "morgan": "^1.9.0"
+    "express-session": "^1.15.6",
+    "mongoose": "^5.0.0-rc0",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
+    "passport-google-oauth2": "^0.1.6",
+    "passport-local": "^1.0.0"
   }
 }
