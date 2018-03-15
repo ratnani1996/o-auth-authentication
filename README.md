@@ -34,6 +34,9 @@ This will start the application at port 3000
 ## See Also
 
 - [`PassportJs`](https://github.com/jaredhanson/passport)
+- [`Passport-o-auth-google20`](https://github.com/mstade/passport-google-oauth2)
+- [`Passport-local`](https://github.com/jaredhanson/passport-local)
+- [`Passport-facebook`](https://github.com/jaredhanson/passport-facebook)
 
 ## License
 
